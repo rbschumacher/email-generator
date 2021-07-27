@@ -2,25 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
-// import { convertGoogleDocumentToJson, convertJsonToMarkdown } from '../src/utils/googleDocsParser'
-import { useEffect } from 'react'
+import generateRssFeed from '../src/lib/rss'
 
 
 export default function Home() {
-  useEffect(() => {
-    const teste = async () => {
-      // const data = await fetch('/api/hello')
-      // const res = await data.json()
-
-      // console.log(res)
-      const data = await fetch(`https://docs.googleapis.com/v1/documents/1kteetCYUboGol2GNiJpsMfsv7JhebpiRZKWu28WKTyw?key=AIzaSyABR4vevKdDep_bAxRihEpfXW6SAeOY_mM`)
-      const res = await data.json()
-      console.log(res)
-    }
-
-    teste()
-  })
-
   return (
     <div className={styles.container}>
       <Head>
@@ -54,4 +39,12 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+export function getStaticProps() {
+  generateRssFeed()
+
+  return {
+    props: {}
+  }
 }
